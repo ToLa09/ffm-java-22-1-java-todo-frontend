@@ -73,7 +73,7 @@ class TaskServiceTest {
         Task task = new Task("1","TestPost", TaskStatus.OPEN);
 
         when(taskRepo.getAllTasks()).thenReturn(new ArrayList<>(List.of(task)));
-        doNothing().when(taskRepo).deleteTask(task);
+        when(taskRepo.deleteTask(task)).thenReturn(task);
 
         //WHEN
         Task actual = taskService.deleteTaskById(id);
