@@ -18,4 +18,12 @@ public class TaskRepo {
         return tasks;
     }
 
+    public void setTask(int index, Task task) {
+        tasks.set(index, task);
+    }
+
+    public Task deleteTask(Task task) {
+        tasks.remove(task);
+        return task;
+    }
 }
