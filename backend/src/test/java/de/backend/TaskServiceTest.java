@@ -68,16 +68,36 @@ class TaskServiceTest {
 
     @Test
     void deleteTaskByIdReturnTask(){
-        // GIVEN
+        //GIVEN
         String id = "1";
         Task task = new Task("1","TestPost", TaskStatus.OPEN);
 
-        // WHEN
         when(taskRepo.getAllTasks()).thenReturn(new ArrayList<>(List.of(task)));
+        doNothing().when(taskRepo).deleteTask(task);
+
+        //WHEN
         Task actual = taskService.deleteTaskById(id);
 
         //THEN
         Task expected = task;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void updateTaskReturnsUpdatedTask(){
+        //GIVEN
+        TaskWithoutId task = new TaskWithoutId("TestPost", TaskStatus.OPEN);
+        Task oldTask = new Task("1","TestPost", TaskStatus.OPEN);
+        Task newTask = new Task("1","Test", TaskStatus.DONE);
+        when(serviceUtils.generateUUID()).thenReturn("1");
+        when(taskRepo.addTask(oldTask)).thenReturn(oldTask);
+        when(taskRepo.getAllTasks()).thenReturn(new ArrayList<>(List.of(oldTask)));
+        doNothing().when(taskRepo).setTask(0,newTask);
+        taskService.addTask(task);
+        //WHEN
+        Task actual = taskService.updateTaskById(newTask.id(),newTask);
+        //THEN
+        Task expected = newTask;
+        assertEquals(expected,actual);
     }
 }

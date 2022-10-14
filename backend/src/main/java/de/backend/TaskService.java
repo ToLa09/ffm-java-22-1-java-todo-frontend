@@ -55,8 +55,7 @@ public class TaskService {
         List<Task> tasks = taskRepo.getAllTasks();
         for (Task task : tasks ) {
             if(task.id().equals(id)){
-                taskRepo.deleteTask(task);
-                return task;
+                return taskRepo.deleteTask(task);
             }
         }
         throw new NoSuchElementException("No task with id "+ id + "was found");
