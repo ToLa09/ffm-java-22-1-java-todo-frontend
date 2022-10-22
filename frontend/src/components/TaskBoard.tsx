@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskCard from "./TaskCard";
 import "../styles/TaskBoard.css";
-import {TaskModel} from "../Model/TaskModel";
+import {TaskModel} from "../model/TaskModel";
 
 type TaskBoardProps = {
     taskList: TaskModel[]

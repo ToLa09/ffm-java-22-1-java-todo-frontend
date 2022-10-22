@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "../styles/TaskCard.css"
-import {TaskModel} from "../Model/TaskModel";
+import {TaskModel} from "../model/TaskModel";
 import TaskModal from "./TaskModal";
 import axios from "axios";
 import {AiOutlineArrowRight, AiOutlineArrowLeft} from "react-icons/ai"

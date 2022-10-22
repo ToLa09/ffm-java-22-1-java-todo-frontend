@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from "./components/Header";
 import TaskBoard from "./components/TaskBoard";
-import {TaskModel} from "./Model/TaskModel"
+import {TaskModel} from "./model/TaskModel"
 import axios from "axios";
 
 function App() {

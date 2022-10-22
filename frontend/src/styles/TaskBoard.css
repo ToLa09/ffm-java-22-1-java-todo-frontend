@@ -12,4 +12,7 @@ main {
     flex-grow: 1;
     gap: 1.2rem;
     flex: 1;
+    padding: 10px;
+    background-color: #e5e5e5;
+    box-shadow: 10px 10px #d9d9d9;
 }

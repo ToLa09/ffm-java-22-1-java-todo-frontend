@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import "../styles/Header.css"
-import {NewTaskModel} from "../Model/NewTaskModel";
+import {NewTaskModel} from "../model/NewTaskModel";
 import axios from "axios";
 import {FiSend} from "react-icons/fi"
-import {TaskModel} from "../Model/TaskModel";
+import {TaskModel} from "../model/TaskModel";
 
 type HeaderProps = {
     fetchAllTasks: () => void
@@ -50,7 +50,7 @@ export default function Header(props: HeaderProps) {
                     <button className="button hoverblue" type='submit'><FiSend size={18}/></button>
                 </form>
                 <div className={"headerBorder numberOfTasksContainer"}>
-                    <p>Number of Tasks: {props.taskList.length}</p>
+                    <p className={"numberOfTasks"}>Number of Tasks: {props.taskList.length}</p>
                     <div className={"numberOfTasksByCatag"}>
                         <p className={"numberOfTasksFiltered"}>Open: {getNumberOfTasks("OPEN")}</p>
                         <p className={"numberOfTasksFiltered"}>In Progress: {getNumberOfTasks("IN_PROGRESS")}</p>

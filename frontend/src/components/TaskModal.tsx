@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import '../styles/TaskModal.css'
-import {TaskModel} from "../Model/TaskModel";
+import {TaskModel} from "../model/TaskModel";
 import axios from "axios";
 
 
