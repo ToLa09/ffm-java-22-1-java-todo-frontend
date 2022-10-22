@@ -25,7 +25,7 @@ function App() {
 
     return (
         <>
-            <Header fetchAllTasks={fetchAllTasks}/>
+            <Header fetchAllTasks={fetchAllTasks} taskList={taskList}/>
             <TaskBoard taskList={taskList} fetchAllTasks={fetchAllTasks}/>
         </>
     );

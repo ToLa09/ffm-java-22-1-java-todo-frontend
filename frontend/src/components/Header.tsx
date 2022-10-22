@@ -3,9 +3,11 @@ import "../styles/Header.css"
 import {NewTaskModel} from "../Model/NewTaskModel";
 import axios from "axios";
 import {FiSend} from "react-icons/fi"
+import {TaskModel} from "../Model/TaskModel";
 
 type HeaderProps = {
     fetchAllTasks: () => void
+    taskList: TaskModel[]
 }
 
 export default function Header(props: HeaderProps) {
@@ -31,16 +33,31 @@ export default function Header(props: HeaderProps) {
         setNewTaskDescription(event.target.value);
     }
 
+    function getNumberOfTasks(status: string) {
+        return props.taskList.filter(task => task.status === status)
+            .length
+    }
+
     return (
         <header>
             <h1>Geile App 2022</h1>
-            <form onSubmit={handleFormSubmit}>
-                <input className="inputTask"
-                        onChange={handleInputChange}
-                       value={newTaskDescription}
-                       type="text" name="inputTaskDescription" placeholder="Add new task"/>
-                <button className="button hoverblue" type='submit'><FiSend size={18}/></button>
-            </form>
+            <div className={"addContainer"}>
+                <form className="headerBorder" onSubmit={handleFormSubmit}>
+                    <input className="inputTask"
+                            onChange={handleInputChange}
+                           value={newTaskDescription}
+                           type="text" name="inputTaskDescription" placeholder="Add new task"/>
+                    <button className="button hoverblue" type='submit'><FiSend size={18}/></button>
+                </form>
+                <div className={"headerBorder numberOfTasksContainer"}>
+                    <p>Number of Tasks: {props.taskList.length}</p>
+                    <div className={"numberOfTasksByCatag"}>
+                        <p className={"numberOfTasksFiltered"}>Open: {getNumberOfTasks("OPEN")}</p>
+                        <p className={"numberOfTasksFiltered"}>In Progress: {getNumberOfTasks("IN_PROGRESS")}</p>
+                        <p className={"numberOfTasksFiltered"}>Done: {getNumberOfTasks("DONE")}</p>
+                    </div>
+                </div>
+            </div>
         </header>
     );
 }
