@@ -1,0 +1,18 @@
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    margin-top: 35px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.inputTask {
+    border: none;
+}
