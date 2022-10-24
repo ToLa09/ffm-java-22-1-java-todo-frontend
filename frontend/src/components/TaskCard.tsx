@@ -19,6 +19,10 @@ export default function TaskCard(props: TaskCardProps) {
         setEditModal(true)
     }
 
+    const handleClose = () => {
+        setEditModal(false)
+    }
+
     const handleDelete = () => {
         axios.delete("/api/todo/" + props.task.id)
             .then(() => {
@@ -29,38 +33,29 @@ export default function TaskCard(props: TaskCardProps) {
             })
     }
 
-    const closeModal = () => {
-        setEditModal(false)
-    }
-
-
-    function handleAdvance() {
+    const updateTask = (description: string, status: string) => {
         axios.put("/api/todo/" + props.task.id, {
             id: props.task.id,
-            description: props.task.description,
-            status: props.task.status === 'OPEN' ? 'IN_PROGRESS' : 'DONE',
+            description: description,
+            status: status,
         })
             .then(response => {
                 props.fetchAllTasks()
             })
             .catch(error => console.log(error))
+    }
+
+    function handleAdvance() {
+        updateTask(props.task.description,props.task.status === 'OPEN' ? 'IN_PROGRESS' : 'DONE')
     }
 
     function handleBackwards() {
-        axios.put("/api/todo/" + props.task.id, {
-            id: props.task.id,
-            description: props.task.description,
-            status: props.task.status === 'DONE' ? 'IN_PROGRESS' : 'OPEN',
-        })
-            .then(response => {
-                props.fetchAllTasks()
-            })
-            .catch(error => console.log(error))
+        updateTask(props.task.description,props.task.status === 'DONE' ? 'IN_PROGRESS' : 'OPEN')
     }
 
     return (
         <>
-            {editModal && <TaskModal closeModal={closeModal} task={props.task} fetchAllTasks={props.fetchAllTasks}/>}
+            {editModal && <TaskModal handleClose={handleClose} updateTask={updateTask} task={props.task} fetchAllTasks={props.fetchAllTasks}/>}
             <section>
                 <div className="taskHeader">
                     <h3>Aufgabe:</h3>

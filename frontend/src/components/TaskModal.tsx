@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import '../styles/TaskModal.css'
 import {TaskModel} from "../model/TaskModel";
-import axios from "axios";
 
 
 type ModalProps = {
-    closeModal: () => void
+    handleClose: () => void
     fetchAllTasks: () => void
+    updateTask: (description: string, status: string) => void
     task: TaskModel
 }
 
@@ -24,17 +24,9 @@ export default function TaskModal(props: ModalProps) {
     }
 
     function updateTask() {
-        axios.put("/api/todo/" + props.task.id, {
-            id: props.task.id,
-            description: taskDescription,
-            status: taskStatus,
-        })
-            .then(response => {
-                props.fetchAllTasks()
-                props.closeModal()
-                return response.data
-            })
-            .catch(error => console.log(error))
+        props.updateTask(taskDescription,taskStatus)
+        props.fetchAllTasks()
+        props.handleClose()
     }
 
     return (
@@ -50,7 +42,7 @@ export default function TaskModal(props: ModalProps) {
                 </select>
                 <div className="buttons__lower">
                     <button className='button hoverblue' onClick={updateTask}>Update</button>
-                    <button className='button hoverred' onClick={props.closeModal}>Cancel</button>
+                    <button className='button hoverred' onClick={props.handleClose}>Cancel</button>
                 </div>
             </div>
         </div>
